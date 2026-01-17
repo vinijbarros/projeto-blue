@@ -14,6 +14,10 @@ logger = logging.getLogger("ws")
 logging.basicConfig(level=logging.INFO)
 
 
+def utc_timestamp() -> str:
+    return datetime.now(timezone.utc).isoformat()
+
+
 @app.get("/health")
 def health() -> dict[str, str]:
     return {"status": "ok"}
@@ -23,6 +27,15 @@ def health() -> dict[str, str]:
 async def websocket_endpoint(websocket: WebSocket) -> None:
     identifier = await manager.connect(websocket)
     logger.info("Conexao aberta: %s", identifier)
+    await manager.broadcast(
+        {
+            "type": "system",
+            "event": "user_connected",
+            "user": identifier,
+            "timestamp": utc_timestamp(),
+        },
+        websocket,
+    )
     try:
         while True:
             message = await websocket.receive_text()
@@ -34,8 +47,9 @@ async def websocket_endpoint(websocket: WebSocket) -> None:
                 preview,
             )
             payload = {
+                "type": "message",
                 "id": str(uuid4()),
-                "timestamp": datetime.now(timezone.utc).isoformat(),
+                "timestamp": utc_timestamp(),
                 "message": message,
                 "from": identifier,
             }
@@ -45,5 +59,14 @@ async def websocket_endpoint(websocket: WebSocket) -> None:
     except Exception:
         pass
     finally:
+        await manager.broadcast(
+            {
+                "type": "system",
+                "event": "user_disconnected",
+                "user": identifier,
+                "timestamp": utc_timestamp(),
+            },
+            websocket,
+        )
         manager.disconnect(websocket)
         logger.info("Conexao encerrada: %s", identifier)

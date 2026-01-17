@@ -45,9 +45,31 @@ body {
   background: #d2f2c9;
 }
 
+.status--error {
+  background: #ffd7d7;
+}
+
+.status__error {
+  margin: 0 0 16px;
+  color: #8a1b1b;
+  font-weight: 600;
+}
+
 .chat {
   display: grid;
   gap: 16px;
+}
+
+.panel label {
+  display: block;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 12px;
 }
 
 .messages {
@@ -61,14 +83,30 @@ body {
   background: #ffffff;
 }
 
+.messages--system {
+  min-height: 80px;
+  max-height: 140px;
+  background: #fdf7ef;
+}
+
 .message {
   padding: 8px 10px;
   border-bottom: 1px solid #e2d2c0;
 }
 
-.message--system {
+.message__meta {
+  font-size: 0.8rem;
   color: #6b4b32;
+  margin-bottom: 4px;
+}
+
+.message__body {
+  font-size: 1rem;
+}
+
+.message--system .message__body {
   font-style: italic;
+  color: #5b4b3f;
 }
 
 .composer {

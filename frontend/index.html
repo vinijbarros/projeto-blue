@@ -14,9 +14,25 @@
       </header>
 
       <section class="status" id="status">Desconectado</section>
+      <p class="status__error" id="statusError" aria-live="polite"></p>
 
       <section class="chat">
+        <div class="panel">
+          <label for="wsUrl">WebSocket URL</label>
+          <div class="row">
+            <input
+              type="text"
+              id="wsUrl"
+              value="ws://localhost:8000/ws"
+              autocomplete="off"
+            />
+            <button type="button" id="connectBtn">Conectar</button>
+          </div>
+        </div>
+
+        <ul class="messages messages--system" id="systemMessages"></ul>
         <ul class="messages" id="messages"></ul>
+
         <form class="composer" id="form">
           <input
             type="text"
@@ -24,7 +40,7 @@
             placeholder="Digite sua mensagem..."
             autocomplete="off"
           />
-          <button type="submit">Enviar</button>
+          <button type="submit" id="sendBtn" disabled>Enviar</button>
         </form>
       </section>
     </main>
