@@ -17,10 +17,12 @@ def health() -> dict[str, str]:
 async def websocket_endpoint(websocket: WebSocket) -> None:
     await manager.connect(websocket)
     try:
-        await manager.broadcast("Um usuario entrou na sala.")
         while True:
             message = await websocket.receive_text()
-            await manager.broadcast(message)
+            await manager.broadcast(message, websocket)
     except WebSocketDisconnect:
+        pass
+    except Exception:
+        pass
+    finally:
         manager.disconnect(websocket)
-        await manager.broadcast("Um usuario saiu da sala.")
