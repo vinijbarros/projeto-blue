@@ -1,0 +1,107 @@
+:root {
+  color-scheme: light;
+  font-family: "Trebuchet MS", "Segoe UI", sans-serif;
+  background-color: #f5f0e8;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: radial-gradient(circle at top, #fff5e6 0%, #f3e4d5 45%, #e3d2c1 100%);
+  color: #2b1f17;
+}
+
+.page {
+  max-width: 760px;
+  margin: 48px auto;
+  padding: 24px;
+  background: #fffaf2;
+  border: 2px solid #2b1f17;
+  box-shadow: 8px 10px 0 #2b1f17;
+}
+
+.header h1 {
+  margin: 0 0 8px;
+  font-size: 2rem;
+}
+
+.header p {
+  margin: 0;
+  font-size: 1rem;
+}
+
+.status {
+  margin: 20px 0;
+  padding: 10px 14px;
+  border: 2px dashed #2b1f17;
+  background: #ffe6c7;
+  font-weight: 600;
+}
+
+.status--connected {
+  background: #d2f2c9;
+}
+
+.chat {
+  display: grid;
+  gap: 16px;
+}
+
+.messages {
+  list-style: none;
+  margin: 0;
+  padding: 12px;
+  min-height: 260px;
+  max-height: 360px;
+  overflow-y: auto;
+  border: 2px solid #2b1f17;
+  background: #ffffff;
+}
+
+.message {
+  padding: 8px 10px;
+  border-bottom: 1px solid #e2d2c0;
+}
+
+.message--system {
+  color: #6b4b32;
+  font-style: italic;
+}
+
+.composer {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 12px;
+}
+
+input {
+  padding: 12px;
+  border: 2px solid #2b1f17;
+  font-size: 1rem;
+}
+
+button {
+  border: 2px solid #2b1f17;
+  background: #ffb85c;
+  font-weight: 700;
+  padding: 12px 20px;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #ffcc7a;
+}
+
+@media (max-width: 600px) {
+  .page {
+    margin: 24px 16px;
+    padding: 18px;
+  }
+
+  .composer {
+    grid-template-columns: 1fr;
+  }
+}
